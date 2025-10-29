@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | Student Earn Hub - Start Earning Today</title>
+<meta name="description" content="Create your Student Earn Hub account to start earning money through simple online tasks. Join thousands of students making extra income.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --primary:#4361ee;
+    --primary-dark:#3a56d4;
+    --secondary:#7209b7;
+    --accent:#f72585;
+    --success:#4cc9f0;
+    --light:#f8f9fa;
+    --dark:#212529;
+    --gray:#6c757d;
+    --radius:10px;
+    --shadow:0 10px 25px rgba(0,0,0,0.08);
+    --transition:all 0.3s ease;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  body{background:#f5f5f5;color:var(--dark);line-height:1.7;}
+  a{text-decoration:none;color:inherit;}
+
+  header{
+    background:white;box-shadow:0 2px 12px rgba(0,0,0,0.1);
+    position:sticky;top:0;z-index:1000;
+  }
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+  .logo{font-size:1.8rem;font-weight:700;color:var(--primary);}
+  .logo span{color:var(--secondary);}
+  .nav-links{display:flex;align-items:center;gap:25px;}
+  .nav-links a{position:relative;font-weight:500;transition:var(--transition);}
+  .nav-links a:not(.btn):after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--primary);transition:var(--transition);}
+  .nav-links a:not(.btn):hover:after{width:100%;}
+  .nav-links a.active{color:var(--primary);font-weight:600;}
+  .nav-links a.active:after{width:100%;}
+  .nav-links .btn{padding:10px 20px;background:var(--primary);color:white;border-radius:var(--radius);transition:var(--transition);}
+  .nav-links .btn:hover{background:var(--primary-dark);transform:translateY(-2px);}
+  .mobile-menu{display:none;font-size:1.5rem;cursor:pointer;}
+
+  .container{
+    max-width:1200px;
+    margin:50px auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+  }
+
+  .registration-hero {
+    padding:30px;
+  }
+
+  h1{color:var(--primary);margin-bottom:15px;font-size:2.5rem;line-height:1.3;}
+  .hero-subtitle {
+    color:var(--gray);
+    font-size:1.1rem;
+    margin-bottom:25px;
+  }
+
+  .benefits-list {
+    margin:25px 0;
+  }
+  .benefit-item {
+    display:flex;
+    align-items:center;
+    margin-bottom:15px;
+  }
+  .benefit-item i {
+    color:var(--success);
+    margin-right:15px;
+    font-size:1.2rem;
+  }
+
+  .form-container{
+    background:white;
+    padding:40px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+
+  .form-header {
+    text-align:center;
+    margin-bottom:30px;
+  }
+  .form-header h2 {
+    color:var(--primary);
+    font-size:1.8rem;
+    margin-bottom:10px;
+  }
+  .form-header p {
+    color:var(--gray);
+  }
+
+  form{
+    width:100%;
+  }
+  .form-row {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+  }
+  .form-group{
+    margin-bottom:20px;
+    display:flex;
+    flex-direction:column;
+  }
+  .form-group.full-width {
+    grid-column:1 / span 2;
+  }
+  label{
+    margin-bottom:8px;
+    font-weight:500;
+    color:var(--dark);
+    display:flex;
+    align-items:center;
+  }
+  label.required:after {
+    content:"*";
+    color:var(--accent);
+    margin-left:4px;
+  }
+  input, select{
+    padding:14px 15px;
+    border:1px solid #ddd;
+    border-radius:var(--radius);
+    font-family:'Poppins',sans-serif;
+    font-size:1rem;
+    transition:var(--transition);
+  }
+  input:focus, select:focus{
+    border-color:var(--primary);
+    outline:none;
+    box-shadow:0 0 0 3px rgba(67,97,238,0.1);
+  }
+  .password-container {
+    position:relative;
+  }
+  .toggle-password {
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:none;
+    color:var(--gray);
+    cursor:pointer;
+  }
+  
+  .terms-group {
+    display:flex;
+    align-items:flex-start;
+    margin:20px 0;
+  }
+  .terms-group input {
+    margin-right:10px;
+    margin-top:5px;
+  }
+  .terms-group label {
+    font-weight:400;
+    font-size:0.9rem;
+    line-height:1.5;
+  }
+  .terms-group a {
+    color:var(--primary);
+    font-weight:500;
+  }
+
+  .submit-btn{
+    width:100%;
+    padding:15px;
+    background:var(--primary);
+    color:white;
+    font-weight:600;
+    border:none;
+    border-radius:var(--radius);
+    cursor:pointer;
+    font-size:1rem;
+    transition:var(--transition);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  .submit-btn:hover{
+    background:var(--primary-dark);
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(67,97,238,0.3);
+  }
+
+  .login-text{
+    text-align:center;
+    margin-top:25px;
+    font-size:0.95rem;
+    color:var(--gray);
+  }
+  .login-text a{
+    color:var(--primary);
+    font-weight:500;
+    transition:var(--transition);
+  }
+  .login-text a:hover {
+    text-decoration:underline;
+  }
+
+  .social-register {
+    margin:25px 0;
+    text-align:center;
+  }
+  .divider {
+    display:flex;
+    align-items:center;
+    margin:20px 0;
+  }
+  .divider:before, .divider:after {
+    content:"";
+    flex:1;
+    border-bottom:1px solid #e9ecef;
+  }
+  .divider span {
+    padding:0 15px;
+    color:var(--gray);
+    font-size:0.9rem;
+  }
+  .social-buttons {
+    display:flex;
+    gap:15px;
+  }
+  .social-btn {
+    flex:1;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:var(--radius);
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    cursor:pointer;
+    transition:var(--transition);
+    font-weight:500;
+  }
+  .social-btn:hover {
+    background:#f8f9fa;
+    border-color:var(--gray);
+  }
+  .social-btn.google i {
+    color:#DB4437;
+  }
+  .social-btn.facebook i {
+    color:#4267B2;
+  }
+
+  footer{
+    background:var(--dark);
+    color:white;
+    padding:60px 0 30px;
+    margin-top:80px;
+  }
+  .footer-container {
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+  .footer-content{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:40px;
+    margin-bottom:40px;
+  }
+  .footer-column h3{
+    font-size:1.2rem;
+    margin-bottom:20px;
+    position:relative;
+    padding-bottom:10px;
+    color:white;
+  }
+  .footer-column h3:after{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:40px;
+    height:2px;
+    background:var(--accent);
+  }
+  .footer-links li{margin-bottom:10px;}
+  .footer-links a{color:rgba(255,255,255,0.7);transition:var(--transition);}
+  .footer-links a:hover{color:white;padding-left:5px;}
+  .footer-bottom{
+    text-align:center;
+    padding-top:30px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    color:rgba(255,255,255,0.7);
+    font-size:0.9rem;
+  }
+  .footer-bottom a{color:rgba(255,255,255,0.7);}
+  .footer-bottom a:hover{color:white;}
+
+  @media(max-width:992px){
+    .container {
+      grid-template-columns:1fr;
+      gap:30px;
+    }
+    .registration-hero {
+      text-align:center;
+    }
+  }
+
+  @media(max-width:768px){
+    .nav-links{
+      display:none;
+      position:absolute;
+      top:70px;
+      left:0;
+      width:100%;
+      background:white;
+      flex-direction:column;
+      padding:20px;
+      gap:15px;
+      box-shadow:0 10px 15px rgba(0,0,0,0.1);
+    }
+    .nav-links.active{display:flex;}
+    .mobile-menu{display:block;}
+    .form-row {
+      grid-template-columns:1fr;
+    }
+    .form-group.full-width {
+      grid-column:1;
+    }
+    h1 {
+      font-size:2rem;
+    }
+  }
+
+  /* Form validation styles */
+  .error-message {
+    color:var(--accent);
+    font-size:0.85rem;
+    margin-top:5px;
+    display:none;
+  }
+  .form-group.error input, .form-group.error select {
+    border-color:var(--accent);
+  }
+  .form-group.error .error-message {
+    display:block;
+  }
+  .form-group.success input, .form-group.success select {
+    border-color:var(--success);
+  }
+
+  /* Password strength indicator */
+  .password-strength {
+    margin-top:5px;
+    height:5px;
+    border-radius:5px;
+    background:#e9ecef;
+    overflow:hidden;
+  }
+  .password-strength-bar {
+    height:100%;
+    width:0;
+    transition:width 0.3s ease;
+  }
+  .strength-weak {
+    background:#f72585;
+    width:25%;
+  }
+  .strength-medium {
+    background:#ff9e00;
+    width:50%;
+  }
+  .strength-strong {
+    background:#4cc9f0;
+    width:75%;
+  }
+  .strength-very-strong {
+    background:#4ade80;
+    width:100%;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-container">
+    <nav>
+      <a href="index.html" class="logo">Student <span>Earn</span> Hub</a>
+      <div class="mobile-menu">☰</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="how-it-works.html">How it Works</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="register.html" class="active">Register</a></li>
+        <li><a href="login.html" class="btn">Login</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Registration Section -->
+<div class="container">
+  <div class="registration-hero">
+    <h1>Start Your Earning Journey Today</h1>
+    <p class="hero-subtitle">Join thousands of students already earning money with simple online tasks</p>
+    
+    <div class="benefits-list">
+      <div class="benefit-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Earn ₹500-₹3000 per month in your free time</span>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Get paid quickly via UPI, Paytm, or Bank Transfer</span>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Access new tasks daily with varying difficulty levels</span>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-check-circle"></i>
+        <span>No experience required - perfect for students</span>
+      </div>
+    </div>
+    
+    <div style="margin-top:30px; padding:20px; background:var(--light); border-radius:var(--radius);">
+      <h3 style="color:var(--primary); margin-bottom:10px;">Why Join Student Earn Hub?</h3>
+      <p style="color:var(--gray); font-size:0.95rem;">Our platform is designed specifically for students looking to earn extra income without compromising their studies. With flexible tasks and instant payments, you can earn money on your own schedule.</p>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h2>Create Your Account</h2>
+      <p>Fill in your details to get started</p>
+    </div>
+
+    <form id="registerForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName" class="required">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+          <div class="error-message">Please enter your first name</div>
+        </div>
+        <div class="form-group">
+          <label for="lastName" class="required">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+          <div class="error-message">Please enter your last name</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="required">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        <div class="error-message">Please enter a valid email address</div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="required">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+        <div class="error-message">Please enter a valid phone number</div>
+      </div>
+
+      <div class="form-group">
+        <label for="college" class="required">College / School</label>
+        <input type="text" id="college" name="college" placeholder="Enter your college or school name" required>
+        <div class="error-message">Please enter your college or school name</div>
+      </div>
+
+      <div class="form-group">
+        <label for="educationLevel">Education Level</label>
+        <select id="educationLevel" name="educationLevel">
+          <option value="" disabled selected>Select your education level</option>
+          <option value="school">School Student</option>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="postgraduate">Postgraduate</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="required">Password</label>
+        <div class="password-container">
+          <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+          <button type="button" class="toggle-password" id="togglePassword">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+        <div class="password-strength">
+          <div class="password-strength-bar" id="passwordStrength"></div>
+        </div>
+        <div class="error-message">Password must be at least 8 characters with letters and numbers</div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword" class="required">Confirm Password</label>
+        <div class="password-container">
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+          <button type="button" class="toggle-password" id="toggleConfirmPassword">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+        <div class="error-message">Passwords do not match</div>
+      </div>
+
+      <div class="terms-group">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a></label>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-user-plus"></i> Create Account
+      </button>
+
+      <div class="social-register">
+        <div class="divider">
+          <span>Or register with</span>
+        </div>
+        <div class="social-buttons">
+          <button type="button" class="social-btn google">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button type="button" class="social-btn facebook">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+      </div>
+
+      <p class="login-text">
+        Already have an account? <a href="login.html">Login here</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Student Earn Hub</h3>
+        <p>The trusted platform for students to earn money through simple online tasks, app downloads, and reviews.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="tasks.html">Available Tasks</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li>Email: support@studentearnhub.com</li>
+          <li>Phone: +91 98765 43210</li>
+          <li>Hours: Mon-Fri, 9AM-6PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Student Earn Hub | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  document.querySelector('.mobile-menu').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+
+  // Toggle password visibility
+  const togglePassword = document.getElementById('togglePassword');
+  const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+  const password = document.getElementById('password');
+  const confirmPassword = document.getElementById('confirmPassword');
+
+  togglePassword.addEventListener('click', function() {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+  });
+
+  toggleConfirmPassword.addEventListener('click', function() {
+    const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+    confirmPassword.setAttribute('type', type);
+    this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+  });
+
+  // Password strength indicator
+  password.addEventListener('input', function() {
+    const strengthBar = document.getElementById('passwordStrength');
+    const value = password.value;
+    let strength = 0;
+    
+    // Check password strength
+    if (value.length >= 8) strength++;
+    if (/[a-z]/.test(value)) strength++;
+    if (/[A-Z]/.test(value)) strength++;
+    if (/[0-9]/.test(value)) strength++;
+    if (/[^A-Za-z0-9]/.test(value)) strength++;
+    
+    // Update strength bar
+    strengthBar.className = 'password-strength-bar';
+    if (strength <= 1) {
+      strengthBar.classList.add('strength-weak');
+    } else if (strength <= 2) {
+      strengthBar.classList.add('strength-medium');
+    } else if (strength <= 4) {
+      strengthBar.classList.add('strength-strong');
+    } else {
+      strengthBar.classList.add('strength-very-strong');
+    }
+  });
+
+  // Form validation
+  document.getElementById('registerForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    let isValid = true;
+    
+    // Reset error states
+    document.querySelectorAll('.form-group').forEach(group => {
+      group.classList.remove('error', 'success');
+    });
+    
+    // Validate first name
+    const firstName = document.getElementById('firstName');
+    if (!firstName.value.trim()) {
+      firstName.parentElement.classList.add('error');
+      isValid = false;
+    } else {
+      firstName.parentElement.classList.add('success');
+    }
+    
+    // Validate last name
+    const lastName = document.getElementById('lastName');
+    if (!lastName.value.trim()) {
+      lastName.parentElement.classList.add('error');
+      isValid = false;
+    } else {
+      lastName.parentElement.classList.add('success');
+    }
+    
+    // Validate email
+    const email = document.getElementById('email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+      email.parentElement.classList.add('error');
+      isValid = false;
+    } else {
+      email.parentElement.classList.add('success');
+    }
+    
+    // Validate phone
+    const phone = document.getElementById('phone');
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone.value.replace(/\D/g, ''))) {
+      phone.parentElement.classList.add('error');
+      isValid = false;
+    } else {
+      phone.parentElement.classList.add('success');
+    }
+    
+    // Validate college
+    const college = document.getElementById('college');
+    if (!college.value.trim()) {
+      college.parentElement.classList.add('error');
+      isValid = false;
+    } else {
+      college.parentElement.classList.add('success');
+    }
+    
+    // Validate password
+    const password = document.getElementById('password');
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
+    if (!passwordRegex.test(password.value)) {
+      password.parentElement.classList.add('error');
+      isValid = false;
+    } else {
+      password.parentElement.classList.add('success');
+    }
+    
+    // Validate confirm password
+    const confirmPassword = document.getElementById('confirmPassword');
+    if (confirmPassword.value !== password.value) {
+      confirmPassword.parentElement.classList.add('error');
+      isValid = false;
+    } else {
+      confirmPassword.parentElement.classList.add('success');
+    }
+    
+    // Validate terms
+    const terms = document.getElementById('terms');
+    if (!terms.checked) {
+      alert('Please agree to the Terms of Service and Privacy Policy');
+      isValid = false;
+    }
+    
+    if (isValid) {
+      // In a real application, you would submit the form to a server here
+      alert('Registration successful! Welcome to Student Earn Hub. You can now start earning money.');
+      // Reset form
+      this.reset();
+      document.querySelectorAll('.form-group').forEach(group => {
+        group.classList.remove('success');
+      });
+      document.getElementById('passwordStrength').className = 'password-strength-bar';
+    }
+  });
+
+  // Social registration buttons (demo only)
+  document.querySelectorAll('.social-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const platform = this.classList.contains('google') ? 'Google' : 'Facebook';
+      alert(`${platform} registration would be implemented here in a real application`);
+    });
+  });
+</script>
+
+</body>
+</html>

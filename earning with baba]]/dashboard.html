@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SYSTEM CONTROL | Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #00ff41;
+      --primary-dark: #00cc33;
+      --accent: #ff003c;
+      --terminal-bg: #0a0a0a;
+      --terminal-border: #1a1a1a;
+      --terminal-text: #00ff41;
+      --terminal-glow: rgba(0, 255, 65, 0.3);
+      --dark: #111111;
+      --light: #f5f6fa;
+      --radius: 4px;
+      --shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+      color: var(--terminal-text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: -1;
+    }
+
+    header {
+      background: rgba(10, 10, 10, 0.9);
+      color: var(--primary);
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--terminal-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .status-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 0.9rem;
+    }
+
+    .container {
+      width: 95%;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 20px;
+    }
+
+    .sidebar {
+      background: rgba(10, 10, 10, 0.8);
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--terminal-border);
+      box-shadow: var(--shadow);
+      height: fit-content;
+    }
+
+    .sidebar button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid var(--terminal-border);
+      background: transparent;
+      color: var(--terminal-text);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .sidebar button:hover {
+      background: rgba(0, 255, 65, 0.1);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--terminal-glow);
+    }
+
+    .sidebar button.active {
+      background: rgba(0, 255, 65, 0.15);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--terminal-glow);
+    }
+
+    .main {
+      background: rgba(10, 10, 10, 0.8);
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--terminal-border);
+      box-shadow: var(--shadow);
+      min-height: 600px;
+      overflow-x: auto;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h2 {
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--terminal-border);
+      font-size: 1.3rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      border: 1px solid var(--terminal-border);
+    }
+
+    th, td {
+      border: 1px solid var(--terminal-border);
+      padding: 12px;
+      text-align: left;
+      color: var(--terminal-text);
+    }
+
+    th {
+      background: rgba(0, 255, 65, 0.1);
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    tr:hover {
+      background: rgba(0, 255, 65, 0.05);
+    }
+
+    .btn {
+      border: none;
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: var(--transition);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .approve {
+      background: rgba(40, 167, 69, 0.2);
+      color: #28a745;
+      border: 1px solid #28a745;
+    }
+
+    .approve:hover {
+      background: rgba(40, 167, 69, 0.3);
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.4);
+    }
+
+    .reject {
+      background: rgba(220, 53, 69, 0.2);
+      color: #dc3545;
+      border: 1px solid #dc3545;
+    }
+
+    .reject:hover {
+      background: rgba(220, 53, 69, 0.3);
+      box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
+    }
+
+    .lock {
+      background: rgba(108, 117, 125, 0.2);
+      color: #6c757d;
+      border: 1px solid #6c757d;
+    }
+
+    .lock:hover {
+      background: rgba(108, 117, 125, 0.3);
+      box-shadow: 0 0 8px rgba(108, 117, 125, 0.4);
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-group input {
+      flex: 1;
+      padding: 10px;
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid var(--terminal-border);
+      border-radius: var(--radius);
+      color: var(--terminal-text);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--terminal-glow);
+    }
+
+    .input-group button {
+      padding: 10px 15px;
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .input-group button:hover {
+      background: rgba(0, 255, 65, 0.1);
+      box-shadow: 0 0 10px var(--terminal-glow);
+    }
+
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .status-pending {
+      background: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
+      border: 1px solid #ffc107;
+    }
+
+    .status-approved {
+      background: rgba(40, 167, 69, 0.2);
+      color: #28a745;
+      border: 1px solid #28a745;
+    }
+
+    .status-rejected {
+      background: rgba(220, 53, 69, 0.2);
+      color: #dc3545;
+      border: 1px solid #dc3545;
+    }
+
+    .status-under-review {
+      background: rgba(0, 123, 255, 0.2);
+      color: #007bff;
+      border: 1px solid #007bff;
+    }
+
+    .status-locked {
+      background: rgba(108, 117, 125, 0.2);
+      color: #6c757d;
+      border: 1px solid #6c757d;
+    }
+
+    .status-active {
+      background: rgba(40, 167, 69, 0.2);
+      color: #28a745;
+      border: 1px solid #28a745;
+    }
+
+    .status-paid {
+      background: rgba(40, 167, 69, 0.2);
+      color: #28a745;
+      border: 1px solid #28a745;
+    }
+
+    .proof-img {
+      width: 80px;
+      height: 50px;
+      object-fit: cover;
+      border: 1px solid var(--terminal-border);
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+
+    .proof-img:hover {
+      transform: scale(1.5);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--terminal-glow);
+    }
+
+    .floating-code {
+      position: absolute;
+      color: rgba(0, 255, 65, 0.1);
+      font-size: 0.8rem;
+      z-index: -1;
+      user-select: none;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid var(--terminal-border);
+      border-radius: var(--radius);
+      padding: 15px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 10px 0;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #aaa;
+    }
+
+    .terminal-output {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--terminal-border);
+      border-radius: var(--radius);
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .terminal-output-line {
+      margin-bottom: 5px;
+      color: var(--terminal-text);
+    }
+
+    .terminal-output-line::before {
+      content: "> ";
+      color: var(--accent);
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .sidebar button {
+        flex: 1;
+        min-width: 150px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-bar {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating code elements for background -->
+<div class="floating-code" style="top: 10%; left: 5%;">if (admin_access) {</div>
+<div class="floating-code" style="top: 15%; right: 10%;">system.monitor();</div>
+<div class="floating-code" style="bottom: 20%; left: 15%;">encrypt(user_data);</div>
+<div class="floating-code" style="bottom: 30%; right: 5%;">secureConnection();</div>
+<div class="floating-code" style="top: 40%; left: 20%;">authenticate(admin);</div>
+<div class="floating-code" style="top: 60%; right: 20%;">return control_panel;</div>
+
+<header>
+  <div class="header-left">
+    <div class="logo"><i class="fas fa-terminal"></i> SYSTEM CONTROL</div>
+    <div class="status-indicator"></div>
+    <span>ADMIN MODE ACTIVE</span>
+  </div>
+  <div class="header-right">
+    <span>Last login: Today 14:23</span>
+    <button class="btn lock" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</header>
+
+<div class="container">
+  <div class="sidebar">
+    <button class="active" onclick="showSection('users')"><i class="fas fa-users"></i> User Management</button>
+    <button onclick="showSection('tasks')"><i class="fas fa-tasks"></i> Task Control</button>
+    <button onclick="showSection('payouts')"><i class="fas fa-money-bill-wave"></i> Payout System</button>
+    <button onclick="showSection('analytics')"><i class="fas fa-chart-bar"></i> System Analytics</button>
+  </div>
+
+  <div class="main">
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">Total Users</div>
+        <div class="stat-value" id="totalUsers">0</div>
+        <div class="stat-label">Registered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active Tasks</div>
+        <div class="stat-value" id="activeTasks">0</div>
+        <div class="stat-label">Available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pending Payouts</div>
+        <div class="stat-value" id="pendingPayouts">0</div>
+        <div class="stat-label">Requests</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">System Status</div>
+        <div class="stat-value"><i class="fas fa-check-circle" style="color: var(--primary);"></i></div>
+        <div class="stat-label">Operational</div>
+      </div>
+    </div>
+
+    <div id="users" class="section active">
+      <h2><i class="fas fa-users"></i> User Management</h2>
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Proof</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="tasks" class="section">
+      <h2><i class="fas fa-tasks"></i> Task Control Panel</h2>
+      <div class="input-group">
+        <input type="text" id="newTask" placeholder="Enter new task command...">
+        <button onclick="addTask()"><i class="fas fa-plus"></i> Add Task</button>
+      </div>
+      <table id="taskTable">
+        <thead>
+          <tr>
+            <th>Task ID</th>
+            <th>Task Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="payouts" class="section">
+      <h2><i class="fas fa-money-bill-wave"></i> Payout System</h2>
+      <table id="payoutTable">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>User</th>
+            <th>UPI ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="analytics" class="section">
+      <h2><i class="fas fa-chart-bar"></i> System Analytics</h2>
+      <div class="terminal-output" id="analyticsOutput">
+        <div class="terminal-output-line">Initializing system analytics...</div>
+        <div class="terminal-output-line">Loading user data statistics...</div>
+        <div class="terminal-output-line">Calculating payout metrics...</div>
+        <div class="terminal-output-line">Generating task performance reports...</div>
+      </div>
+      <div style="margin-top: 20px; text-align: center; color: #aaa;">
+        <i class="fas fa-info-circle"></i> Advanced analytics dashboard coming in v2.0
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Initialize data
+  let users = JSON.parse(localStorage.getItem('users')) || [
+    {id: "USR001", name: "Gyanendra", phone: "6395394399", proof: "https://via.placeholder.com/80x50/00ff41/000000?text=PROOF", status: "Pending"},
+    {id: "USR002", name: "Ankit", phone: "9999999999", proof: "https://via.placeholder.com/80x50/007bff/000000?text=PROOF", status: "Under Review"},
+    {id: "USR003", name: "Rahul", phone: "8888888888", proof: "https://via.placeholder.com/80x50/28a745/000000?text=PROOF", status: "Approved"},
+    {id: "USR004", name: "Priya", phone: "7777777777", proof: "https://via.placeholder.com/80x50/dc3545/000000?text=PROOF", status: "Rejected"}
+  ];
+
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [
+    {id: "TSK001", task: "Watch Video Ad", status: "Active"},
+    {id: "TSK002", task: "Download App", status: "Locked"},
+    {id: "TSK003", task: "Complete Survey", status: "Active"},
+    {id: "TSK004", task: "Refer a Friend", status: "Active"}
+  ];
+
+  let payouts = JSON.parse(localStorage.getItem('payouts')) || [
+    {id: "PYT001", user: "Gyanendra", upi: "gyan@upi", amount: "₹50", status: "Pending"},
+    {id: "PYT002", user: "Rahul", upi: "rahul@okaxis", amount: "₹100", status: "Pending"},
+    {id: "PYT003", user: "Priya", upi: "priya@paytm", amount: "₹75", status: "Paid"}
+  ];
+
+  // Initialize the dashboard
+  document.addEventListener('DOMContentLoaded', function() {
+    renderUsers();
+    renderTasks();
+    renderPayouts();
+    updateStats();
+    
+    // Show analytics terminal
+    document.getElementById('analyticsOutput').style.display = 'block';
+  });
+
+  // Section navigation
+  const sections = document.querySelectorAll('.section');
+  const sidebarButtons = document.querySelectorAll('.sidebar button');
+  
+  function showSection(id) {
+    sections.forEach(s => s.classList.remove('active'));
+    sidebarButtons.forEach(b => b.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    
+    // Add terminal output for analytics
+    if (id === 'analytics') {
+      const output = document.getElementById('analyticsOutput');
+      output.innerHTML += `<div class="terminal-output-line">Section changed to: ${id}</div>`;
+      output.scrollTop = output.scrollHeight;
+    }
+  }
+
+  // Update statistics
+  function updateStats() {
+    document.getElementById('totalUsers').textContent = users.length;
+    document.getElementById('activeTasks').textContent = tasks.filter(t => t.status === 'Active').length;
+    document.getElementById('pendingPayouts').textContent = payouts.filter(p => p.status === 'Pending').length;
+  }
+
+  // User management functions
+  function renderUsers() {
+    const tbody = document.querySelector("#userTable tbody");
+    tbody.innerHTML = "";
+    users.forEach((u, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${u.id}</td>
+          <td>${u.name}</td>
+          <td>${u.phone}</td>
+          <td><img src="${u.proof}" class="proof-img" alt="Proof"></td>
+          <td><span class="status-badge status-${u.status.toLowerCase().replace(' ', '-')}">${u.status}</span></td>
+          <td>
+            <button class="btn approve" onclick="approveUser(${i})"><i class="fas fa-check"></i> Approve</button>
+            <button class="btn reject" onclick="rejectUser(${i})"><i class="fas fa-times"></i> Reject</button>
+          </td>
+        </tr>`;
+    });
+    updateStats();
+  }
+
+  function approveUser(i) {
+    users[i].status = "Approved";
+    localStorage.setItem('users', JSON.stringify(users));
+    renderUsers();
+    logAction(`User ${users[i].name} (${users[i].id}) approved`);
+  }
+
+  function rejectUser(i) {
+    users[i].status = "Rejected";
+    localStorage.setItem('users', JSON.stringify(users));
+    renderUsers();
+    logAction(`User ${users[i].name} (${users[i].id}) rejected`);
+  }
+
+  // Task management functions
+  function renderTasks() {
+    const tbody = document.querySelector("#taskTable tbody");
+    tbody.innerHTML = "";
+    tasks.forEach((t, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${t.id}</td>
+          <td>${t.task}</td>
+          <td><span class="status-badge status-${t.status.toLowerCase()}">${t.status}</span></td>
+          <td>
+            <button class="btn lock" onclick="toggleLock(${i})">
+              <i class="fas ${t.status === 'Locked' ? 'fa-unlock' : 'fa-lock'}"></i> ${t.status === 'Locked' ? 'Unlock' : 'Lock'}
+            </button>
+            <button class="btn reject" onclick="deleteTask(${i})"><i class="fas fa-trash"></i> Delete</button>
+          </td>
+        </tr>`;
+    });
+    updateStats();
+  }
+
+  function addTask() {
+    const taskName = document.getElementById('newTask').value.trim();
+    if(taskName === "") return alert("Enter a task name!");
+    
+    const newId = "TSK" + String(tasks.length + 1).padStart(3, '0');
+    tasks.push({id: newId, task: taskName, status: "Active"});
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+    document.getElementById('newTask').value = "";
+    logAction(`Task "${taskName}" added with ID: ${newId}`);
+  }
+
+  function toggleLock(i) {
+    tasks[i].status = tasks[i].status === "Locked" ? "Active" : "Locked";
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+    logAction(`Task ${tasks[i].id} ${tasks[i].status === 'Locked' ? 'locked' : 'unlocked'}`);
+  }
+
+  function deleteTask(i) {
+    const taskName = tasks[i].task;
+    const taskId = tasks[i].id;
+    tasks.splice(i, 1);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+    logAction(`Task "${taskName}" (${taskId}) deleted`);
+  }
+
+  // Payout management functions
+  function renderPayouts() {
+    const tbody = document.querySelector("#payoutTable tbody");
+    tbody.innerHTML = "";
+    payouts.forEach((p, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${p.id}</td>
+          <td>${p.user}</td>
+          <td>${p.upi}</td>
+          <td>${p.amount}</td>
+          <td><span class="status-badge status-${p.status.toLowerCase()}">${p.status}</span></td>
+          <td>
+            ${p.status === 'Pending' ? 
+              `<button class="btn approve" onclick="approvePayout(${i})"><i class="fas fa-check"></i> Process</button>` : 
+              `<span class="status-badge status-paid">Completed</span>`
+            }
+          </td>
+        </tr>`;
+    });
+    updateStats();
+  }
+
+  function approvePayout(i) {
+    payouts[i].status = "Paid";
+    localStorage.setItem('payouts', JSON.stringify(payouts));
+    renderPayouts();
+    logAction(`Payout ${payouts[i].amount} to ${payouts[i].user} processed`);
+  }
+
+  // Utility functions
+  function logAction(message) {
+    console.log(`[ADMIN ACTION] ${message}`);
+    
+    // Add to analytics terminal if visible
+    const analyticsSection = document.getElementById('analytics');
+    if (analyticsSection.classList.contains('active')) {
+      const output = document.getElementById('analyticsOutput');
+      output.innerHTML += `<div class="terminal-output-line">${message}</div>`;
+      output.scrollTop = output.scrollHeight;
+    }
+  }
+
+  function logout() {
+    if (confirm("Terminate admin session?")) {
+      localStorage.removeItem("adminLoggedIn");
+      window.location.href = "login.html";
+    }
+  }
+</script>
+</body>
+</html>

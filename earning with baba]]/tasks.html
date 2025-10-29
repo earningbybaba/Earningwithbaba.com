@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Tasks | Student Earn Hub - Earn Money Online</title>
+  <meta name="description" content="Browse available tasks to earn money online. Complete app downloads, surveys, and reviews to earn rewards. Perfect for students looking to make extra income.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #7209b7;
+      --accent: #f72585;
+      --success: #4cc9f0;
+      --warning: #ff9e00;
+      --danger: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .nav-links a:not(.btn):after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:not(.btn):hover:after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .nav-links a.active:after {
+      width: 100%;
+    }
+
+    .nav-links .btn {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      background: var(--primary);
+      color: white;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .nav-links .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .mobile-menu {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .page-header p {
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: white;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 30px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      background: var(--light);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Ad Container */
+    .ad-container {
+      background: #f8f9fa;
+      border: 1px dashed #dee2e6;
+      padding: 20px;
+      text-align: center;
+      margin: 30px 0;
+      border-radius: var(--border-radius);
+    }
+
+    .ad-label {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ad-content {
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+    }
+
+    /* Filter Section */
+    .filter-section {
+      background: white;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 30px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      background: var(--light);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .filter-btn:hover:not(.active) {
+      background: #e9ecef;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 15px 10px 40px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+    }
+
+    /* Task Grid */
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .task-card {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .task-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .task-card.locked {
+      opacity: 0.7;
+    }
+
+    .task-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-new {
+      background: var(--accent);
+      color: white;
+    }
+
+    .badge-popular {
+      background: var(--warning);
+      color: white;
+    }
+
+    .badge-completed {
+      background: var(--success);
+      color: white;
+    }
+
+    .task-image {
+      height: 160px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+
+    .task-content {
+      padding: 20px;
+    }
+
+    .task-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+
+    .task-desc {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .task-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .task-reward {
+      font-weight: 700;
+      color: var(--success);
+      font-size: 1.2rem;
+    }
+
+    .task-difficulty {
+      display: flex;
+      gap: 3px;
+    }
+
+    .difficulty-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e9ecef;
+    }
+
+    .difficulty-dot.active {
+      background: var(--warning);
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .task-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .task-btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .task-btn.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .task-btn.secondary {
+      background: var(--light);
+      color: var(--dark);
+    }
+
+    .task-btn.secondary:hover {
+      background: #e9ecef;
+    }
+
+    .task-btn:disabled {
+      background: #e9ecef;
+      color: var(--gray);
+      cursor: not-allowed;
+    }
+
+    /* Info Section */
+    .info-section {
+      background: white;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 30px;
+    }
+
+    .info-section h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .info-card {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .info-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .info-card h3 {
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+
+    .info-card p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      color: white;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 15px 0;
+      }
+    .logout-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 26px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 64, 90, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  box-shadow: 0 6px 20px rgba(255, 90, 90, 0.6);
+  transform: translateY(-2px);
+}
+
+.logout-btn:active {
+  transform: scale(0.97);
+}
+
+.logout-btn i {
+  font-size: 18px;
+}
+
+
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        gap: 15px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .task-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .task-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">Student <span>Earning with</span> BABA</a>
+        <button id="logoutBtn" class="logout-btn">
+  <i class="fas fa-sign-out-alt"></i> Logout
+</button>
+
+
+        <div class="mobile-menu">☰</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="how-it-works.html">How it Works</a></li>
+          <li><a href="tasks.html" class="active">Tasks</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html" class="btn">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="container">
+    <div class="page-header">
+        <!-- Withdraw Button -->
+<div style="text-align:right; margin-bottom:20px;">
+  <a href="button.html" class="submit-btn" style="display:inline-flex; align-items:center; gap:8px;">
+    <i class="fas fa-wallet"></i> <B>TO WITHDRAW CLICK HERE</B> 
+    
+  </a>
+  
+</div>
+
+      <h1>Available Tasks</h1>
+      <p>Complete these tasks to earn money. New tasks are added regularly to help students earn extra income!</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="totalTasks">12</div>
+          <div class="stat-label">Total Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="completedTasks">3</div>
+          <div class="stat-label">Completed Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">₹<span id="totalEarnings">450</span></div>
+          <div class="stat-label">Total Earnings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="availableTasks">9</div>
+          <div class="stat-label">Available Tasks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad Container -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-content">
+        <!-- Google AdSense code would go here -->
+        Ad Space (728x90)
+      </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <div class="filter-row">
+        <div class="filter-group">
+          <button class="filter-btn active" data-filter="all">All Tasks</button>
+          <button class="filter-btn" data-filter="available">Available</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+          <button class="filter-btn" data-filter="new">New</button>
+          <button class="filter-btn" data-filter="popular">Popular</button>
+        </div>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search tasks...">
+        </div>
+      </div>
+    </div>
+
+    <!-- Task Grid -->
+    <div class="task-grid" id="tasks-container">
+      <!-- Tasks will be inserted here dynamically -->
+    </div>
+
+    <!-- Ad Container -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-content">
+        <!-- Google AdSense code would go here -->
+        Ad Space (300x250)
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <h2>How to Complete Tasks Successfully</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <i class="fas fa-check-circle"></i>
+          <h3>Read Instructions Carefully</h3>
+          <p>Make sure you understand all requirements before starting a task to ensure your submission gets approved.</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-camera"></i>
+          <h3>Provide Clear Proof</h3>
+          <p>Take clear screenshots or provide accurate information as proof of task completion for faster verification.</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-clock"></i>
+          <h3>Submit Promptly</h3>
+          <p>Submit your proof as soon as you complete a task to receive your rewards faster.</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-star"></i>
+          <h3>Maintain Quality</h3>
+          <p>Consistently providing quality submissions increases your chances of getting higher-paying tasks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Student Earn Hub</h3>
+          <p>The trusted platform for students to earn money through simple online tasks, app downloads, and reviews.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="tasks.html">Available Tasks</a></li>
+           
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li>Email: support@studentearnhub.com</li>
+            <li>Phone: +91 98765 43210</li>
+            <li>Hours: Mon-Fri, 9AM-6PM</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Student Earn Hub | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+  const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  if (!user) {
+    // not logged in → send back to login
+     alert("⚠️Please login first to access tasks.⚠️");
+    window.location.href = "login.html";
+  } else {
+    document.getElementById('welcome').innerText = `Welcome, ${user.name}! 👋`;
+  }
+});
+    
+    // Sample dynamic tasks with more details
+    const tasks = [
+      {
+        id: 1,
+        title: "Download App & Earn",
+        description: "Download our partner app and complete registration to earn ₹50.",
+        reward: 50,
+        category: "app",
+        difficulty: 1,
+        status: "available", // available, completed, locked
+        badge: "new",
+        icon: "fas fa-mobile-alt"
+      },
+      {
+        id: 2,
+        title: "Complete Survey",
+        description: "Fill out a short survey about your preferences and earn ₹30.",
+        reward: 30,
+        category: "survey",
+        difficulty: 1,
+        status: "available",
+        badge: "",
+        icon: "fas fa-clipboard-list"
+      },
+      {
+        id: 3,
+        title: "Watch Video",
+        description: "Watch a 5-minute educational video and submit screenshot to earn ₹20.",
+        reward: 20,
+        category: "video",
+        difficulty: 1,
+        status: "available",
+        badge: "popular",
+        icon: "fas fa-play-circle"
+      },
+      {
+        id: 4,
+        title: "Refer a Friend",
+        description: "Refer a friend and earn ₹100 when they complete their first task.",
+        reward: 100,
+        category: "referral",
+        difficulty: 2,
+        status: "available",
+        badge: "",
+        icon: "fas fa-user-friends"
+      },
+      {
+        id: 5,
+        title: "Social Media Share",
+        description: "Share our platform on social media and tag us to earn ₹25.",
+        reward: 25,
+        category: "other",
+        difficulty: 1,
+        status: "completed",
+        badge: "",
+        icon: "fas fa-share-alt"
+      },
+      {
+        id: 6,
+        title: "Product Review",
+        description: "Write a detailed review for a product and earn ₹40.",
+        reward: 40,
+        category: "other",
+        difficulty: 2,
+        status: "locked",
+        badge: "",
+        icon: "fas fa-star"
+      },
+      {
+        id: 7,
+        title: "Website Testing",
+        description: "Test a website and provide feedback to earn ₹60.",
+        reward: 60,
+        category: "testing",
+        difficulty: 2,
+        status: "available",
+        badge: "new",
+        icon: "fas fa-laptop-code"
+      },
+      {
+        id: 8,
+        title: "Data Entry Task",
+        description: "Complete a simple data entry task and earn ₹35.",
+        reward: 35,
+        category: "data",
+        difficulty: 1,
+        status: "available",
+        badge: "",
+        icon: "fas fa-keyboard"
+      }
+    ];
+
+    // DOM Elements
+    const tasksContainer = document.getElementById('tasks-container');
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    // Initialize the page
+    function init() {
+      renderTasks();
+      setupEventListeners();
+    }
+
+    // Render tasks based on current filter and search
+    function renderTasks() {
+      tasksContainer.innerHTML = '';
+      
+      const filteredTasks = tasks.filter(task => {
+        const matchesFilter = 
+          currentFilter === 'all' || 
+          (currentFilter === 'available' && task.status === 'available') ||
+          (currentFilter === 'completed' && task.status === 'completed') ||
+          (currentFilter === 'new' && task.badge === 'new') ||
+          (currentFilter === 'popular' && task.badge === 'popular');
+        
+        const matchesSearch = 
+          task.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+          task.description.toLowerCase().includes(currentSearch.toLowerCase());
+        
+        return matchesFilter && matchesSearch;
+      });
+      
+      if (filteredTasks.length === 0) {
+        tasksContainer.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <i class="fas fa-tasks" style="font-size: 3rem; color: #ddd; margin-bottom: 15px;"></i>
+            <h3 style="color: var(--gray);">No tasks found</h3>
+            <p>Try adjusting your filters or search terms</p>
+          </div>
+        `;
+        return;
+      }
+      
+      filteredTasks.forEach(task => {
+        const taskCard = document.createElement('div');
+        taskCard.className = `task-card ${task.status === 'completed' || task.status === 'locked' ? 'locked' : ''}`;
+        
+        // Generate difficulty dots
+        let difficultyDots = '';
+        for (let i = 1; i <= 3; i++) {
+          difficultyDots += `<div class="difficulty-dot ${i <= task.difficulty ? 'active' : ''}"></div>`;
+        }
+        
+        taskCard.innerHTML = `
+          ${task.badge ? `<div class="task-badge badge-${task.badge}">${task.badge}</div>` : ''}
+          <div class="task-image">
+            <i class="${task.icon}"></i>
+          </div>
+          <div class="task-content">
+            <h3 class="task-title">${task.title}</h3>
+            <p class="task-desc">${task.description}</p>
+            <div class="task-meta">
+              <div class="task-reward">₹${task.reward}</div>
+              <div class="task-difficulty">${difficultyDots}</div>
+            </div>
+     <div class="task-actions">
+  ${task.status === 'available' ? 
+    `<button class="task-btn primary" onclick="startTask(${task.id})">
+      <i class="fas fa-play"></i> Start Task
+    </button>
+    <button class="task-btn secondary" onclick="openWithdraw(${task.id})">
+      <i class="fas fa-upload"></i> Submit Proof
+    </button>` : 
+    task.status === 'pending' ?
+    `<button class="task-btn secondary" disabled>
+      <i class="fas fa-hourglass-half"></i> Pending
+    </button>
+    <button class="task-btn secondary" onclick="reviewTask(${task.id})">
+      <i class="fas fa-eye"></i> Review
+    </button>` :
+    task.status === 'completed' ?
+    `<button class="task-btn secondary" disabled>
+      <i class="fas fa-check"></i> Approved
+    </button>` :
+    task.status === 'rejected' ?
+    `<button class="task-btn secondary" disabled>
+      <i class="fas fa-times"></i> Rejected
+    </button>` :
+    `<button class="task-btn secondary" disabled>
+      <i class="fas fa-lock"></i> Locked
+    </button>`
+  }
+</div>
+
+
+          </div>
+        `;
+        tasksContainer.appendChild(taskCard);
+      });
+    }
+
+    // Setup event listeners
+    function setupEventListeners() {
+      // Filter buttons
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          renderTasks();
+        });
+      });
+      
+      // Search input
+      searchInput.addEventListener('input', () => {
+        currentSearch = searchInput.value;
+        renderTasks();
+      });
+      
+      // Mobile menu
+      document.querySelector('.mobile-menu').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+      });
+    }
+
+    // Task functions
+    function startTask(taskId) {
+      const task = tasks.find(t => t.id === taskId);
+      alert(`Starting task: ${task.title}\n\nPlease complete the task as described and then submit proof to claim your reward.`);
+    }
+
+  function openWithdraw(taskId) {
+  const task = tasks.find(t => t.id === taskId);
+
+  if (task.status === 'available') {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.capture = 'environment';
+
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        task.status = 'pending'; // Submission goes to pending
+        renderTasks();
+        alert(`Your proof for "${task.title}" has been submitted and is pending approval.`);
+      }
+    };
+    input.click();
+  } else if (task.status === 'pending') {
+    alert(`Task "${task.title}" is pending review. Please wait for approval.`);
+  } else if (task.status === 'completed') {
+    alert(`Task "${task.title}" has been completed. You earned ₹${task.reward}.`);
+  } else if (task.status === 'rejected') {
+    alert(`Task "${task.title}" was rejected. Please try again.`);
+  } else {
+    alert(`Task "${task.title}" is currently locked.`);
+  }
+}
+
+
+    // Initialize the page
+    init();
+    
+  document.getElementById('logoutBtn').addEventListener('click', function() {
+  if (confirm("Are you sure you want to logout?")) {
+    sessionStorage.removeItem('loggedInUser'); 
+    alert("✅ You have been logged out.");
+    window.location.href = "login.html"; 
+  }
+});
+
+
+  // Protect tasks page
+  window.addEventListener('load', () => {
+    const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    if (!user) {
+      alert("Please login first!");
+      window.location.href = "login.html";
+    } else {
+      console.log(`Welcome ${user.name}`);
+    }
+  });
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Student Earn Hub - Access Your Account</title>
+<meta name="description" content="Login to your Student Earn Hub account to access earning opportunities, track your progress, and withdraw your earnings.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --primary:#4361ee;
+  --primary-dark:#3a56d4;
+  --secondary:#7209b7;
+  --accent:#f72585;
+  --success:#4cc9f0;
+  --light:#f8f9fa;
+  --dark:#212529;
+  --gray:#6c757d;
+  --radius:10px;
+  --shadow:0 10px 25px rgba(0,0,0,0.08);
+  --transition:all 0.3s ease;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#f5f5f5;color:var(--dark);line-height:1.7;}
+a{text-decoration:none;color:inherit;}
+
+header{
+  background:white;box-shadow:0 2px 12px rgba(0,0,0,0.1);
+  position:sticky;top:0;z-index:1000;
+}
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+.logo{font-size:1.8rem;font-weight:700;color:var(--primary);}
+.logo span{color:var(--secondary);}
+.nav-links{display:flex;align-items:center;gap:25px;}
+.nav-links a{position:relative;font-weight:500;transition:var(--transition);}
+.nav-links a:not(.btn):after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--primary);transition:var(--transition);}
+.nav-links a:not(.btn):hover:after{width:100%;}
+.nav-links a.active{color:var(--primary);font-weight:600;}
+.nav-links a.active:after{width:100%;}
+.nav-links .btn{padding:10px 20px;background:var(--primary);color:white;border-radius:var(--radius);transition:var(--transition);}
+.nav-links .btn:hover{background:var(--primary-dark);transform:translateY(-2px);}
+.mobile-menu{display:none;font-size:1.5rem;cursor:pointer;}
+
+.container{
+  max-width:1200px;
+  margin:50px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+
+.login-hero {
+  padding:30px;
+}
+
+h1{color:var(--primary);margin-bottom:15px;font-size:2.5rem;line-height:1.3;}
+.hero-subtitle {
+  color:var(--gray);
+  font-size:1.1rem;
+  margin-bottom:25px;
+}
+
+.features-list {
+  margin:25px 0;
+}
+.feature-item {
+  display:flex;
+  align-items:center;
+  margin-bottom:15px;
+}
+.feature-item i {
+  color:var(--success);
+  margin-right:15px;
+  font-size:1.2rem;
+}
+
+.form-container{
+  background:white;
+  padding:40px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.form-header {
+  text-align:center;
+  margin-bottom:30px;
+}
+.form-header h2 {
+  color:var(--primary);
+  font-size:1.8rem;
+  margin-bottom:10px;
+}
+.form-header p {
+  color:var(--gray);
+}
+
+form{
+  width:100%;
+}
+.form-group{
+  margin-bottom:20px;
+  display:flex;
+  flex-direction:column;
+}
+label{
+  margin-bottom:8px;
+  font-weight:500;
+  color:var(--dark);
+  display:flex;
+  align-items:center;
+}
+label.required:after {
+  content:"*";
+  color:var(--accent);
+  margin-left:4px;
+}
+input{
+  padding:14px 15px;
+  border:1px solid #ddd;
+  border-radius:var(--radius);
+  font-family:'Poppins',sans-serif;
+  font-size:1rem;
+  transition:var(--transition);
+}
+input:focus{
+  border-color:var(--primary);
+  outline:none;
+  box-shadow:0 0 0 3px rgba(67,97,238,0.1);
+}
+.password-container {
+  position:relative;
+}
+.toggle-password {
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  color:var(--gray);
+  cursor:pointer;
+}
+
+.options-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:20px 0;
+}
+.remember-me {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.remember-me input {
+  margin:0;
+}
+.forgot-password {
+  color:var(--primary);
+  font-weight:500;
+  font-size:0.9rem;
+  transition:var(--transition);
+}
+.forgot-password:hover {
+  text-decoration:underline;
+}
+
+.submit-btn{
+  width:100%;
+  padding:15px;
+  background:var(--primary);
+  color:white;
+  font-weight:600;
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  font-size:1rem;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+.submit-btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(67,97,238,0.3);
+}
+
+.register-text{
+  text-align:center;
+  margin-top:25px;
+  font-size:0.95rem;
+  color:var(--gray);
+}
+.register-text a{
+  color:var(--primary);
+  font-weight:500;
+  transition:var(--transition);
+}
+.register-text a:hover {
+  text-decoration:underline;
+}
+
+.social-login {
+  margin:25px 0;
+  text-align:center;
+}
+.divider {
+  display:flex;
+  align-items:center;
+  margin:20px 0;
+}
+.divider:before, .divider:after {
+  content:"";
+  flex:1;
+  border-bottom:1px solid #e9ecef;
+}
+.divider span {
+  padding:0 15px;
+  color:var(--gray);
+  font-size:0.9rem;
+}
+.social-buttons {
+  display:flex;
+  gap:15px;
+}
+.social-btn {
+  flex:1;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:var(--radius);
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  transition:var(--transition);
+  font-weight:500;
+}
+.social-btn:hover {
+  background:#f8f9fa;
+  border-color:var(--gray);
+}
+.social-btn.google i {
+  color:#DB4437;
+}
+.social-btn.facebook i {
+  color:#4267B2;
+}
+
+footer{
+  background:var(--dark);
+  color:white;
+  padding:60px 0 30px;
+  margin-top:80px;
+}
+.footer-container {
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+}
+.footer-content{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:40px;
+  margin-bottom:40px;
+}
+.footer-column h3{
+  font-size:1.2rem;
+  margin-bottom:20px;
+  position:relative;
+  padding-bottom:10px;
+  color:white;
+}
+.footer-column h3:after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:40px;
+  height:2px;
+  background:var(--accent);
+}
+.footer-links li{margin-bottom:10px;}
+.footer-links a{color:rgba(255,255,255,0.7);transition:var(--transition);}
+.footer-links a:hover{color:white;padding-left:5px;}
+.footer-bottom{
+  text-align:center;
+  padding-top:30px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.7);
+  font-size:0.9rem;
+}
+.footer-bottom a{color:rgba(255,255,255,0.7);}
+.footer-bottom a:hover{color:white;}
+
+@media(max-width:992px){
+  .container {
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+  .login-hero {
+    text-align:center;
+  }
+}
+
+@media(max-width:768px){
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:70px;
+    left:0;
+    width:100%;
+    background:white;
+    flex-direction:column;
+    padding:20px;
+    gap:15px;
+    box-shadow:0 10px 15px rgba(0,0,0,0.1);
+  }
+  .nav-links.active{display:flex;}
+  .mobile-menu{display:block;}
+  h1 {
+    font-size:2rem;
+  }
+  .social-buttons {
+    flex-direction:column;
+  }
+}
+
+/* Form validation styles */
+.error-message {
+  color:var(--accent);
+  font-size:0.85rem;
+  margin-top:5px;
+  display:none;
+}
+.form-group.error input {
+  border-color:var(--accent);
+}
+.form-group.error .error-message {
+  display:block;
+}
+.form-group.success input {
+  border-color:var(--success);
+}
+
+/* Demo user info */
+.demo-info {
+  background:var(--light);
+  padding:15px;
+  border-radius:var(--radius);
+  margin-top:20px;
+  font-size:0.9rem;
+}
+.demo-info h4 {
+  margin-bottom:10px;
+  color:var(--primary);
+}
+.demo-credentials {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.demo-credential {
+  background:white;
+  padding:10px;
+  border-radius:var(--radius);
+  font-size:0.85rem;
+}
+.demo-credential strong {
+  color:var(--primary);
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-container">
+    <nav>
+      <a href="index.html" class="logo">Student <span>Earn</span> Hub</a>
+      <div class="mobile-menu">☰</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="how-it-works.html">How it Works</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html" class="active">Login</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Login Section -->
+<div class="container">
+  <div class="login-hero">
+    <h1>Welcome Back!</h1>
+    <p class="hero-subtitle">Login to continue your earning journey and access exclusive tasks</p>
+    
+    <div class="features-list">
+      <div class="feature-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Access your personalized dashboard</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Track your earnings and task progress</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Withdraw your earnings instantly</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Get personalized task recommendations</span>
+      </div>
+    </div>
+    
+    <div style="margin-top:30px; padding:20px; background:var(--light); border-radius:var(--radius);">
+      <h3 style="color:var(--primary); margin-bottom:10px;">New to Student Earn Hub?</h3>
+      <p style="color:var(--gray); font-size:0.95rem;">Join thousands of students earning money through simple online tasks. Create an account to start earning today!</p>
+      <a href="register.html" class="submit-btn" style="margin-top:15px; text-align:center; display:block;">
+        <i class="fas fa-user-plus"></i> Create Account
+      </a>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h2>Login to Your Account</h2>
+      <p>Enter your credentials to access your account</p>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="phone" class="required">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your registered phone number" required>
+        <div class="error-message">Please enter a valid phone number</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="required">Password</label>
+        <div class="password-container">
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <button type="button" class="toggle-password" id="togglePassword">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+        <div class="error-message">Please enter your password</div>
+      </div>
+
+      <div class="options-row">
+        <div class="remember-me">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember" style="font-weight:400; font-size:0.9rem;">Remember me</label>
+        </div>
+        <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+
+      <div class="social-login">
+        <div class="divider">
+          <span>Or login with</span>
+        </div>
+        <div class="social-buttons">
+          <button type="button" class="social-btn google">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button type="button" class="social-btn facebook">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+      </div>
+
+      <p class="register-text">
+        Don't have an account? <a href="register.html">Register here</a>
+      </p>
+    </form>
+
+    <!-- Demo credentials for testing -->
+    <div class="demo-info">
+      <h4>Demo Credentials (For Testing)</h4>
+      <div class="demo-credentials">
+        <div class="demo-credential">
+          <strong>Phone:</strong> 9876543210<br>
+          <strong>Password:</strong> demo123
+        </div>
+        <div class="demo-credential">
+          <strong>Phone:</strong> 9123456789<br>
+          <strong>Password:</strong> student123
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Student Earn Hub</h3>
+        <p>The trusted platform for students to earn money through simple online tasks, app downloads, and reviews.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="tasks.html">Available Tasks</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Legal</h3>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li>Email: support@studentearnhub.com</li>
+          <li>Phone: +91 98765 43210</li>
+          <li>Hours: Mon-Fri, 9AM-6PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Student Earn Hub | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  document.querySelector('.mobile-menu').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+
+  // Toggle password visibility
+  const togglePassword = document.getElementById('togglePassword');
+  const password = document.getElementById('password');
+
+  togglePassword.addEventListener('click', function() {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+  });
+
+  // Check if user is already logged in
+  window.addEventListener('load', function() {
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      alert("⚠️ You are already logged in!");
+      window.location.href = "tasks.html";
+    }
+  });
+
+  // Login form submit
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const phoneInput = document.getElementById('phone');
+    const passwordInput = document.getElementById('password');
+
+    const phone = phoneInput.value.trim();
+    const pwd = passwordInput.value;
+
+    // Validate phone
+    const phoneRegex = /^[0-9]{10}$/;
+    if(!phoneRegex.test(phone)){
+      phoneInput.parentElement.classList.add('error');
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    } else {
+      phoneInput.parentElement.classList.remove('error');
+    }
+
+    // Validate password
+    if(pwd.length < 6){
+      passwordInput.parentElement.classList.add('error');
+      alert("Password must be at least 6 characters.");
+      return;
+    } else {
+      passwordInput.parentElement.classList.remove('error');
+    }
+
+    // Demo credentials
+    const demoCredentials = [
+      { phone: '9876543210', password: 'demo123', name: 'Demo User' },
+      { phone: '9123456789', password: 'student123', name: 'Student User' }
+    ];
+
+    const user = demoCredentials.find(u => u.phone === phone && u.password === pwd);
+
+    if(user){
+      // Save login session
+      sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+      alert(`✅ Login successful! Welcome back, ${user.name}.`);
+      window.location.href = "tasks.html";
+    } else {
+      alert("❌ Invalid phone number or password. Try demo credentials.");
+    }
+  });
+
+</script>
+
+
+</body>
+</html>

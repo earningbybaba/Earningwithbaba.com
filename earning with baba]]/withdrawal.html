@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Withdraw Funds | Student Earn Hub</title>
+<meta name="description" content="Withdraw your earnings safely and instantly to your preferred UPI account or payment app.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --primary:#4361ee;
+  --primary-dark:#3a56d4;
+  --secondary:#7209b7;
+  --accent:#f72585;
+  --success:#4cc9f0;
+  --light:#f8f9fa;
+  --dark:#212529;
+  --gray:#6c757d;
+  --radius:10px;
+  --shadow:0 10px 25px rgba(0,0,0,0.08);
+  --transition:all 0.3s ease;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#f5f5f5;color:var(--dark);line-height:1.7;}
+a{text-decoration:none;color:inherit;}
+header{
+  background:white;box-shadow:0 2px 12px rgba(0,0,0,0.1);
+  position:sticky;top:0;z-index:1000;
+}
+.header-container {
+  max-width: 1200px;margin: 0 auto;padding: 0 20px;
+}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+.logo{font-size:1.8rem;font-weight:700;color:var(--primary);}
+.logo span{color:var(--secondary);}
+.nav-links{display:flex;align-items:center;gap:25px;}
+.nav-links a{position:relative;font-weight:500;transition:var(--transition);}
+.nav-links a:not(.btn):after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--primary);transition:var(--transition);}
+.nav-links a:not(.btn):hover:after{width:100%;}
+.nav-links a.active{color:var(--primary);font-weight:600;}
+.nav-links a.active:after{width:100%;}
+.nav-links .btn{padding:10px 20px;background:var(--primary);color:white;border-radius:var(--radius);transition:var(--transition);}
+.nav-links .btn:hover{background:var(--primary-dark);transform:translateY(-2px);}
+.mobile-menu{display:none;font-size:1.5rem;cursor:pointer;}
+
+.container{
+  max-width:900px;margin:50px auto;padding:0 20px;
+}
+
+.withdraw-container{
+  background:white;
+  padding:40px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+h1{color:var(--primary);margin-bottom:15px;font-size:2rem;text-align:center;}
+.form-group{margin-bottom:20px;display:flex;flex-direction:column;}
+label{margin-bottom:8px;font-weight:500;color:var(--dark);}
+label.required:after{content:"*";color:var(--accent);margin-left:4px;}
+input{
+  padding:14px 15px;border:1px solid #ddd;border-radius:var(--radius);
+  font-family:'Poppins',sans-serif;font-size:1rem;transition:var(--transition);
+}
+input:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px rgba(67,97,238,0.1);}
+.submit-btn{
+  width:100%;
+  padding:15px;
+  background:var(--primary);
+  color:white;
+  font-weight:600;
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  font-size:1rem;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+.submit-btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(67,97,238,0.3);
+}
+.payment-methods{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+.payment-methods img{
+  width:80px;
+  height:auto;
+  cursor:pointer;
+  border:2px solid transparent;
+  border-radius:var(--radius);
+  transition:var(--transition);
+}
+.payment-methods img.selected{
+  border-color:var(--primary);
+  box-shadow:0 5px 15px rgba(67,97,238,0.2);
+}
+.info-text{
+  text-align:center;
+  font-size:0.95rem;
+  color:var(--gray);
+  margin-bottom:20px;
+}
+
+@media(max-width:768px){
+  .payment-methods img{
+    width:60px;
+  }
+  h1{font-size:1.6rem;}
+}
+
+/* Error message */
+.error-message{
+  color:var(--accent);
+  font-size:0.85rem;
+  margin-top:5px;
+  display:none;
+}
+.form-group.error input{
+  border-color:var(--accent);
+}
+.form-group.error .error-message{
+  display:block;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <nav>
+      <a href="index.html" class="logo">Student <span>Earn</span> Hub</a>
+      <div class="mobile-menu">☰</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tasks.html">Tasks</a></li>
+        <li><a href="withdrawal.html" class="active">Withdraw</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="withdraw-container">
+    <h1>Withdraw Your Earnings</h1>
+    <p class="info-text">Enter your UPI ID and select your preferred payment method to withdraw funds instantly.</p>
+    
+    <form id="withdrawForm">
+      <div class="form-group">
+        <label for="upi" class="required">UPI ID</label>
+        <input type="text" id="upi" name="upi" placeholder="example@upi" required>
+        <div class="error-message">Please enter a valid UPI ID</div>
+      </div>
+
+      <div class="form-group">
+        <label class="required">Select Payment Method</label>
+        <div class="payment-methods">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Pay_Logo.svg" alt="Google Pay" data-method="Google Pay">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/PhonePe_Logo_2019.png" alt="PhonePe" data-method="PhonePe">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Paytm-logo.png" alt="Paytm" data-method="Paytm">
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Withdraw Now
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Mobile menu toggle
+  document.querySelector('.mobile-menu').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+
+  // Payment method selection
+  const paymentImages = document.querySelectorAll('.payment-methods img');
+  let selectedMethod = null;
+  paymentImages.forEach(img => {
+    img.addEventListener('click', function() {
+      paymentImages.forEach(i => i.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedMethod = this.dataset.method;
+    });
+  });
+
+  // Form submission
+  document.getElementById('withdrawForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const upi = document.getElementById('upi').value.trim();
+    const upiRegex = /^[\w.-]+@[\w]+$/;
+
+    // Reset error
+    const formGroup = document.getElementById('upi').parentElement;
+    formGroup.classList.remove('error');
+
+    if(!upiRegex.test(upi)){
+      formGroup.classList.add('error');
+      return;
+    }
+
+    if(!selectedMethod){
+      alert("Please select a payment method");
+      return;
+    }
+
+    alert(`Withdrawal request submitted!\nUPI: ${upi}\nMethod: ${selectedMethod}`);
+    // Here, you would normally call an API to process withdrawal
+    document.getElementById('withdrawForm').reset();
+    paymentImages.forEach(i => i.classList.remove('selected'));
+    selectedMethod = null;
+  });
+</script>
+
+</body>
+</html>

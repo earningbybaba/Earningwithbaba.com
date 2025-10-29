@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECURE ACCESS | Admin Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --primary: #00ff41;
+  --primary-dark: #00cc33;
+  --accent: #ff003c;
+  --terminal-bg: #0a0a0a;
+  --terminal-border: #1a1a1a;
+  --terminal-text: #00ff41;
+  --terminal-glow: rgba(0, 255, 65, 0.3);
+  --dark: #111111;
+  --light: #f5f6fa;
+  --radius: 4px;
+  --shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+  background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--terminal-text);
+  overflow: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: -1;
+}
+
+.terminal-box {
+  background: var(--terminal-bg);
+  padding: 30px;
+  border-radius: var(--radius);
+  border: 1px solid var(--terminal-border);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  animation: scanline 3s linear infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--terminal-border);
+}
+
+.terminal-header h2 {
+  color: var(--primary);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+.terminal-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+  position: relative;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid var(--terminal-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--terminal-text);
+  transition: var(--transition);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.input-group input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 10px var(--terminal-glow);
+}
+
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--terminal-text);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.toggle-password:hover {
+  opacity: 1;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  background: rgba(0, 255, 65, 0.1);
+  box-shadow: 0 0 15px var(--terminal-glow);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn:disabled:hover::before {
+  display: none;
+}
+
+.error-message {
+  color: var(--accent);
+  margin-top: 10px;
+  font-size: 0.9rem;
+  display: none;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.success-message {
+  color: var(--primary);
+  margin-top: 10px;
+  font-size: 0.9rem;
+  display: none;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #777;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.attempts-warning {
+  color: #ff9800;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: none;
+  text-align: center;
+}
+
+.terminal-output {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--terminal-border);
+  border-radius: var(--radius);
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  max-height: 150px;
+  overflow-y: auto;
+  display: none;
+}
+
+.terminal-output-line {
+  margin-bottom: 5px;
+  color: var(--terminal-text);
+}
+
+.terminal-output-line::before {
+  content: "> ";
+  color: var(--accent);
+}
+
+.security-notice {
+  font-size: 0.7rem;
+  color: #777;
+  text-align: center;
+  margin-top: 15px;
+  border-top: 1px solid var(--terminal-border);
+  padding-top: 15px;
+}
+
+.cyber-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cyber-logo i {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--primary);
+}
+
+.floating-code {
+  position: absolute;
+  color: rgba(0, 255, 65, 0.1);
+  font-size: 0.8rem;
+  z-index: -1;
+  user-select: none;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Floating code elements for background -->
+<div class="floating-code" style="top: 10%; left: 5%;">if (access_granted) {</div>
+<div class="floating-code" style="top: 15%; right: 10%;">firewall.active = true;</div>
+<div class="floating-code" style="bottom: 20%; left: 15%;">encrypt(data);</div>
+<div class="floating-code" style="bottom: 30%; right: 5%;">secureConnection();</div>
+<div class="floating-code" style="top: 40%; left: 20%;">authenticate(user);</div>
+<div class="floating-code" style="top: 60%; right: 20%;">return auth_token;</div>
+
+<div class="terminal-box">
+  <div class="cyber-logo">
+    <i class="fas fa-user-shield"></i>
+  </div>
+  
+  <div class="terminal-header">
+    <h2><i class="fas fa-terminal"></i> SECURE ACCESS</h2>
+    <div class="terminal-status">
+      <div class="status-indicator"></div>
+      <span>SYSTEM ONLINE</span>
+    </div>
+  </div>
+  
+  <form id="adminLoginForm">
+    <div class="input-group">
+      <label for="email"><i class="fas fa-user"></i> ADMIN ID</label>
+      <input type="email" id="email" placeholder="admin@system.local" required>
+    </div>
+    
+    <div class="input-group">
+      <label for="password"><i class="fas fa-key"></i> ACCESS KEY</label>
+      <div class="password-container">
+        <input type="password" id="password" placeholder="········" required>
+        <button type="button" class="toggle-password" id="togglePassword">
+          <i class="far fa-eye"></i>
+        </button>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> 
+      <span>AUTHENTICATE</span>
+      <div class="loading" id="loadingSpinner"></div>
+    </button>
+    
+    <div class="error-message" id="errorMsg">ACCESS DENIED - Invalid credentials</div>
+    <div class="success-message" id="successMsg">ACCESS GRANTED - Redirecting to secure dashboard...</div>
+    <div class="attempts-warning" id="attemptsWarning"></div>
+    
+    <div class="terminal-output" id="terminalOutput">
+      <div class="terminal-output-line">Initializing security protocols...</div>
+      <div class="terminal-output-line">Establishing secure connection...</div>
+      <div class="terminal-output-line">Verifying user credentials...</div>
+    </div>
+  </form>
+  
+  <div class="security-notice">
+    <i class="fas fa-shield-alt"></i> This system is protected by advanced security measures. Unauthorized access is prohibited.
+  </div>
+  
+  <div class="footer">
+    Return to <a href="index.html">PUBLIC INTERFACE</a>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const loginForm = document.getElementById('adminLoginForm');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const togglePasswordBtn = document.getElementById('togglePassword');
+  const loginBtn = document.getElementById('loginBtn');
+  const errorMsg = document.getElementById('errorMsg');
+  const successMsg = document.getElementById('successMsg');
+  const attemptsWarning = document.getElementById('attemptsWarning');
+  const loadingSpinner = document.getElementById('loadingSpinner');
+  const terminalOutput = document.getElementById('terminalOutput');
+  
+  // Show terminal output on focus
+  emailInput.addEventListener('focus', function() {
+    terminalOutput.style.display = 'block';
+  });
+  
+  // Toggle password visibility
+  togglePasswordBtn.addEventListener('click', function() {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+  });
+  
+  // Form submission
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    
+    // Clear previous messages
+    errorMsg.style.display = 'none';
+    successMsg.style.display = 'none';
+    
+    // Basic validation
+    if (!email || !password) {
+      showError('All fields required for authentication');
+      return;
+    }
+    
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showError('Invalid administrator ID format');
+      return;
+    }
+    
+    // Show loading state
+    loginBtn.disabled = true;
+    loadingSpinner.style.display = 'block';
+    loginBtn.querySelector('span').textContent = 'AUTHENTICATING...';
+    
+    // Update terminal output
+    updateTerminalOutput('Verifying credentials with security server...');
+    
+    // Simulate API call delay
+    setTimeout(function() {
+      // Check login credentials
+      if (email === "admin@system.local" && password === "secure123") {
+        // Store login state
+        localStorage.setItem("adminLoggedIn", "true");
+        
+        // Reset attempts counter on successful login
+        localStorage.removeItem('loginAttempts');
+        localStorage.removeItem('lastFailedAttempt');
+        
+        // Update terminal output
+        updateTerminalOutput('Credentials verified. Access granted.');
+        
+        // Show success message and redirect
+        showSuccess('ACCESS GRANTED - Redirecting to secure dashboard...');
+        
+        setTimeout(function() {
+          window.location.href = "dashboard.html";
+        }, 2000);
+      } else {
+        // Handle failed login
+        handleFailedLogin();
+        showError('ACCESS DENIED - Invalid credentials');
+        updateTerminalOutput('Authentication failed. Invalid credentials.');
+        
+        // Reset button state
+        loginBtn.disabled = false;
+        loadingSpinner.style.display = 'none';
+        loginBtn.querySelector('span').textContent = 'AUTHENTICATE';
+      }
+    }, 1500);
+  });
+  
+  function showError(message) {
+    errorMsg.textContent = message;
+    errorMsg.style.display = 'block';
+    successMsg.style.display = 'none';
+  }
+  
+  function showSuccess(message) {
+    successMsg.textContent = message;
+    successMsg.style.display = 'block';
+    errorMsg.style.display = 'none';
+  }
+  
+  function updateTerminalOutput(message) {
+    const outputLine = document.createElement('div');
+    outputLine.className = 'terminal-output-line';
+    outputLine.textContent = message;
+    terminalOutput.appendChild(outputLine);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+  
+  function handleFailedLogin() {
+    // Get current attempts or initialize
+    let attempts = parseInt(localStorage.getItem('loginAttempts')) || 0;
+    attempts++;
+    localStorage.setItem('loginAttempts', attempts.toString());
+    
+    // Store timestamp of last failed attempt
+    localStorage.setItem('lastFailedAttempt', Date.now().toString());
+    
+    // Show warning after 3 attempts
+    if (attempts >= 3) {
+      const remainingAttempts = 5 - attempts;
+      if (remainingAttempts > 0) {
+        attemptsWarning.textContent = `SECURITY WARNING: ${remainingAttempts} attempt(s) remaining before system lockout.`;
+        attemptsWarning.style.display = 'block';
+      } else {
+        // Lock the form for 15 minutes after 5 failed attempts
+        lockForm(15);
+      }
+    }
+  }
+  
+  function lockForm(minutes) {
+    const lockUntil = Date.now() + (minutes * 60 * 1000);
+    localStorage.setItem('formLockedUntil', lockUntil.toString());
+    
+    attemptsWarning.textContent = `SYSTEM LOCKED: Too many failed attempts. Try again in ${minutes} minutes.`;
+    attemptsWarning.style.display = 'block';
+    loginBtn.disabled = true;
+    
+    // Check lock status periodically
+    const lockInterval = setInterval(function() {
+      const now = Date.now();
+      const lockUntil = parseInt(localStorage.getItem('formLockedUntil'));
+      
+      if (now > lockUntil) {
+        localStorage.removeItem('formLockedUntil');
+        localStorage.removeItem('loginAttempts');
+        attemptsWarning.style.display = 'none';
+        loginBtn.disabled = false;
+        clearInterval(lockInterval);
+      }
+    }, 1000);
+  }
+  
+  // Check if form is locked on page load
+  const lockUntil = localStorage.getItem('formLockedUntil');
+  if (lockUntil && Date.now() < parseInt(lockUntil)) {
+    const minutesLeft = Math.ceil((parseInt(lockUntil) - Date.now()) / (60 * 1000));
+    lockForm(minutesLeft);
+  }
+  
+  // Add typing effect to inputs for hacker aesthetic
+  emailInput.addEventListener('input', function() {
+    if (this.value.length > 0 && !terminalOutput.style.display) {
+      terminalOutput.style.display = 'block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
